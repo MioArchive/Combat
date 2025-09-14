@@ -43,7 +43,7 @@ public class Combat extends JavaPlugin {
             }
 
             if (!isInCombat(player) && combatPlayers.containsKey(player.getUniqueId())) {
-                if (!(Combat.getInstance().getConfig().getString("Messages.NoLongerInCombat", "").equalsIgnoreCase(""))) {
+                if (!(getConfig().getString("Messages.NoLongerInCombat", "").equalsIgnoreCase(""))) {
                     player.sendMessage(MessageUtil.get("Messages.NoLongerInCombat"));
                 }
                 combatPlayers.remove(player.getUniqueId());
@@ -61,14 +61,17 @@ public class Combat extends JavaPlugin {
             return;
         }
 
-        if (!isInCombat(player) && !(Combat.getInstance().getConfig().getString("Messages.NowInCombat", "").equalsIgnoreCase(""))) {
+        if (!isInCombat(player) && !(getConfig().getString("Messages.NowInCombat", "").equalsIgnoreCase(""))) {
             player.sendMessage(MessageUtil.get("Messages.NowInCombat"));
         }
 
         combatPlayers.put(player.getUniqueId(), System.currentTimeMillis() + 1000 * getConfig().getLong("Duration", 0L));
-        player.setGliding(false);
-        player.setFlying(false);
-        player.setAllowFlight(false);
+        
+        if (getConfig().getBoolean("disable-elytra")) {
+            player.setGliding(false);
+            player.setFlying(false);
+            player.setAllowFlight(false);
+        }
     }
 
 }
