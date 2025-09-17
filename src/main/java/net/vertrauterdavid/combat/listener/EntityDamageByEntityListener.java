@@ -1,6 +1,7 @@
 package net.vertrauterdavid.combat.listener;
 
 import net.vertrauterdavid.combat.Combat;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -23,7 +24,7 @@ public class EntityDamageByEntityListener implements Listener {
             Combat.getInstance().setCombat(damagerP);
         }
 
-        if (damager instanceof Projectile projectile) {
+        if (damager instanceof Projectile projectile && Combat.getInstance().isInCombat(player)) {
             if (projectile.getShooter() instanceof Player shooter) {
                 Combat.getInstance().setCombat(player);
                 Combat.getInstance().setCombat(shooter);

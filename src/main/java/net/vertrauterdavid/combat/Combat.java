@@ -35,6 +35,7 @@ public class Combat extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), instance);
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), instance);
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportListener(), instance);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(), instance);
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> Bukkit.getOnlinePlayers().forEach(player -> {
             if (isInCombat(player)) {
